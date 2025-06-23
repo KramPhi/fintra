@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Net Worth Over Time</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 p-4">
+  <div class="max-w-5xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold text-center mb-6">📈 Net Worth Over Time</h1>
+
+    <!-- Scrollable Container -->
+    <div class="overflow-x-auto overflow-y-hidden max-h-[80vh]">
+      <canvas id="netWorthChart" class="w-full min-w-[600px]"></canvas>
+    </div>
+
+    <div class="text-center mt-6">
+      <a href="/" class="text-blue-600 hover:underline">← Back to Dashboard</a>
+    </div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('netWorthChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: {{ net_dates | tojson }},
+        datasets: [{
+          label: 'Net Worth',
+          data: {{ net_values | tojson }},
+          borderColor: 'blue',
+          backgroundColor: 'rgba(0, 0, 255, 0.1)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { beginAtZero: true }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Net Worth + 6-Month Forecast'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

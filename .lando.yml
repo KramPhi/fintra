@@ -1,0 +1,14 @@
+name: financial-tracker
+recipe: python
+config:
+  webroot: .
+  python: "3.11"
+services:
+  appserver:
+    type: python
+    build_as_root:
+      - pip install -r requirements.txt
+tooling:
+  flask:
+    service: appserver
+    cmd: flask

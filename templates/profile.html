@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex justify-center items-center">
+  <div class="bg-white p-6 rounded shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-4 text-center">👤 My Profile</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="space-y-4">
+      <input type="text" name="first_name" value="{{ user[2] }}" placeholder="First Name" required class="w-full px-4 py-2 border rounded">
+      <input type="text" name="last_name" value="{{ user[3] }}" placeholder="Last Name" required class="w-full px-4 py-2 border rounded">
+      <input type="email" name="email" value="{{ user[1] }}" placeholder="Email" required class="w-full px-4 py-2 border rounded">
+      <input type="password" name="new_password" placeholder="New Password (leave blank to keep current)" class="w-full px-4 py-2 border rounded">
+      <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Update Profile</button>
+    </form>
+
+    <div class="text-center mt-6 space-y-2">
+      <a href="/" class="text-blue-600 hover:underline block">← Back to Dashboard</a>
+      <a href="/logout" class="text-red-600 hover:underline block">🔓 Logout</a>
+    </div>
+  </div>
+</body>
+</html>

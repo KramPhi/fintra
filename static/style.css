@@ -1,0 +1,29 @@
+body {
+    font-family: Arial;
+    padding: 20px;
+    background: #f4f4f4;
+}
+form, table {
+    margin: 20px 0;
+}
+input, select {
+    padding: 5px;
+    margin-right: 10px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+td, th {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+
+a[href="/logout"] {
+    font-weight: bold;
+    transition: background 0.3s;
+}
+a[href="/logout"]:hover {
+    background: darkred;
+}

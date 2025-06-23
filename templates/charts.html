@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Charts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 p-4">
+  <div class="max-w-5xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold text-center mb-6">📊 Income & Expense Charts</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="w-full">
+        <canvas id="barChart"></canvas>
+      </div>
+      <div class="w-full">
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+
+    <div class="text-center mt-6">
+      <a href="/" class="text-blue-600 hover:underline">← Back to Dashboard</a>
+    </div>
+  </div>
+
+  <script>
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: {{ months | tojson }},
+        datasets: [
+          { label: 'Income', data: {{ income_data | tojson }}, backgroundColor: 'green' },
+          { label: 'Expense', data: {{ expense_data | tojson }}, backgroundColor: 'red' }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    const pieCtx = document.getElementById('pieChart').getContext('2d');
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: {{ categories | tojson }},
+        datasets: [{
+          label: 'Expenses by Category',
+          data: {{ category_totals | tojson }},
+          backgroundColor: ['#f43f5e', '#3b82f6', '#10b981', '#f59e0b', '#6366f1']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  </script>
+</body>
+</html>
